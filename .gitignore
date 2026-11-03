@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+publish/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Temporary files
+*.tmp
+*.log
+*.cache
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
