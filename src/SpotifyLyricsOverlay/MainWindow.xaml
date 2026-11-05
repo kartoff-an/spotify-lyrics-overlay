@@ -5,8 +5,103 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotifyLyricsOverlay"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Spotify Lyrics Overlay"
+        Height="150" Width="720"
+        WindowStyle="None"
+        ResizeMode = "NoResize"
+        AllowsTransparency = "True"
+        Background = "Transparent"
+        Topmost = "True"
+        WindowStartupLocation="CenterScreen">
 
-    </Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#AAAAAA" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="28" />
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#E6191919"
+            CornerRadius="4"
+            BorderBrush="#333333"
+            BorderThickness="1"
+            Padding="4"
+            Cursor="SizeAll"
+            MouseLeftButtonDown="Overlay_MouseLeftButtonDown">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header / Drag Region -->
+            <Grid Grid.Row="0">
+                <TextBlock x:Name="TrackInfo" 
+                        Text="No media playing"
+                        Foreground="#999999"
+                        FontSize="10"
+                        FontWeight="SemiBold"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        TextTrimming="CharacterEllipsis"
+                        MaxWidth="600"/>
+                <Button Content="×"
+                        Cursor="Hand"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="CloseButton_Click" IsEnabled="False">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#333333" />
+                            <Setter Property="Foreground" Value="#CCCCCC" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+
+                <TextBlock x:Name="PreviousLyric"
+                        Text="Previous Lyric"
+                        Foreground="#666666"
+                        FontSize="15"
+                        TextAlignment="Center"
+                        Margin="0,0,0,12" />
+
+                <TextBlock x:Name="CurrentLyric"
+                        Text="Waiting for playback..."
+                        Foreground="White"
+                        FontSize="27"
+                        FontWeight="Semibold"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap"
+                        Margin="0,0,0,12" />
+
+                <TextBlock x:Name="NextLyric"
+                        Text="Next Lyric"
+                        Foreground="#666666"
+                        FontSize="15"
+                        TextAlignment="Center" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
