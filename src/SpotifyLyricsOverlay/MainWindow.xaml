@@ -55,7 +55,7 @@
                         Cursor="Hand"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Click="CloseButton_Click" IsEnabled="False">
+                        Click="CloseButton_Click">
 
                     <Button.Style>
                         <Style TargetType="Button">

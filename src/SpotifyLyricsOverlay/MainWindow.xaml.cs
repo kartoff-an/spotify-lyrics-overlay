@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using SpotifyLyricsOverlay.Models;
 using SpotifyLyricsOverlay.Services;
@@ -84,7 +86,7 @@ public partial class MainWindow : Window
                 return;
             }
 
-            TrackInfo.Text = string.IsNullOrWhiteSpace(track.Album) ? track.SourceApp : track.Album;
+            TrackInfo.Text = $"{track.Title} | {track.Artist}";
             string trackKey = $"{track.Title}|{track.Artist}|{track.Album}";
             if (trackKey != _currentTrackKey)
             {
@@ -175,6 +177,14 @@ public partial class MainWindow : Window
 
     private void Overlay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
+        DependencyObject? parent = e.OriginalSource as DependencyObject;
+        while (parent is not null)
+        {
+            if (parent is Button)
+                return;
+            parent = VisualTreeHelper.GetParent(parent);
+        }
+        
         if (e.ButtonState == MouseButtonState.Pressed)
             DragMove();
     }
