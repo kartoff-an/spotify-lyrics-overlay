@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using SpotifyLyricsOverlay.Models;
 using SpotifyLyricsOverlay.Services;
@@ -173,6 +174,10 @@ public partial class MainWindow : Window
         PreviousLyric.Text = activeIndex > 0 ? _lyrics[activeIndex - 1].Text : string.Empty;
         CurrentLyric.Text = activeIndex >= 0 ? _lyrics[activeIndex].Text : "Waiting for lyrics...";
         NextLyric.Text = activeIndex < _lyrics.Count - 1 ? _lyrics[activeIndex + 1].Text : string.Empty;
+
+        AnimateLyric(PreviousLyric, 5, 250);
+        AnimateLyric(CurrentLyric, 14, 350);
+        AnimateLyric(NextLyric, 5, 250);
     }
 
     private void Overlay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -193,5 +198,47 @@ public partial class MainWindow : Window
     {
         _timer.Stop();
         Close();
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        BeginAnimation(
+            Window.OpacityProperty,
+            new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(400),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            }
+        );
+    }
+
+    private void AnimateLyric(TextBlock textBlock, double distance, int duration)
+    {
+        textBlock.BeginAnimation(
+            OpacityProperty,
+            new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(duration),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            }
+        );
+
+        if (textBlock.RenderTransform is TranslateTransform transform)
+        {
+            transform.BeginAnimation(
+                TranslateTransform.YProperty,
+                new DoubleAnimation
+                {
+                    From = distance,
+                    To = 0,
+                    Duration = TimeSpan.FromMilliseconds(duration),
+                    EasingFunction = new CubicEase {  EasingMode = EasingMode.EaseOut }
+                }
+            );
+        }
     }
 }
