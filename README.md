@@ -4,6 +4,8 @@ A lightweight, always-on-top Windows overlay that displays synchronized lyrics f
 
 The application reads playback information through the Windows Global System Media Transport Controls API and retrieves synchronized lyrics from [LRCLIB](https://lrclib.net/). It does not require Spotify developer credentials or a Spotify login.
 
+![Spotify Lyrics Overlay](docs/screenshot.png)
+
 ## Requirements
 
 - Windows 10 version 19041 or later, or a compatible Windows 11 installation.
