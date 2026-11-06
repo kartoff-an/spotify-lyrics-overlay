@@ -6,6 +6,10 @@ obj/
 [Rr]elease/
 publish/
 
+# Release packages
+/releases/
+*.zip
+
 # Visual Studio
 .vs/
 *.suo
