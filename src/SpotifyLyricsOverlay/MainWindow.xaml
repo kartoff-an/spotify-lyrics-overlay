@@ -7,12 +7,15 @@
         mc:Ignorable="d"
         Title="Spotify Lyrics Overlay"
         Height="150" Width="720"
+        MinHeight="100" MinWidth="400"
         WindowStyle="None"
-        ResizeMode = "NoResize"
+        ResizeMode = "CanResize"
         AllowsTransparency = "True"
         Background = "Transparent"
         Topmost = "True"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        SourceInitialized="Window_SourceInitialized">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -33,16 +36,16 @@
             Padding="4"
             Cursor="SizeAll"
             MouseLeftButtonDown="Overlay_MouseLeftButtonDown">
+        <Viewbox Stretch="Uniform">
+            <Grid Width="710" Height="140">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!-- Header / Drag Region -->
-            <Grid Grid.Row="0">
-                <TextBlock x:Name="TrackInfo" 
+                <!-- Header / Drag Region -->
+                <Grid Grid.Row="0">
+                    <TextBlock x:Name="TrackInfo" 
                         Text="No media playing"
                         Foreground="#999999"
                         FontSize="10"
@@ -51,36 +54,36 @@
                         HorizontalAlignment="Left"
                         TextTrimming="CharacterEllipsis"
                         MaxWidth="600"/>
-                <Button Content="×"
+                    <Button Content="×"
                         Cursor="Hand"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="CloseButton_Click">
 
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#333333" />
-                            <Setter Property="Foreground" Value="#CCCCCC" />
-                            <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="2">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Grid>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#333333" />
+                                <Setter Property="Foreground" Value="#CCCCCC" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
 
-            <StackPanel Grid.Row="1"
+                <StackPanel Grid.Row="1"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
 
-                <TextBlock x:Name="PreviousLyric"
+                    <TextBlock x:Name="PreviousLyric"
                         Text="Previous Lyric"
                         Foreground="#666666"
                         FontSize="15"
@@ -93,7 +96,7 @@
                         </TextBlock.RenderTransform>
                     </TextBlock>
 
-                <TextBlock x:Name="CurrentLyric"
+                    <TextBlock x:Name="CurrentLyric"
                         Text="Waiting for playback..."
                         Foreground="White"
                         FontSize="27"
@@ -108,7 +111,7 @@
                         </TextBlock.RenderTransform>
                     </TextBlock>
 
-                <TextBlock x:Name="NextLyric"
+                    <TextBlock x:Name="NextLyric"
                         Text="Next Lyric"
                         Foreground="#666666"
                         FontSize="15"
@@ -119,7 +122,8 @@
                             <TranslateTransform Y="0" />
                         </TextBlock.RenderTransform>
                     </TextBlock>
-            </StackPanel>
-        </Grid>
+                </StackPanel>
+            </Grid>
+        </Viewbox>
     </Border>
 </Window>
