@@ -15,7 +15,7 @@ The application reads playback information through the Windows Global System Med
 
 ## Download and run
 
-Download the latest `SpotifyLyricsOverlay-v*-win-x64.zip` release and extract it to a folder. Run:
+Download the [latest release](https://github.com/kartoff-an/spotify-lyrics-overlay/releases/tag/v1.0.0) (`v1.0.0`) and extract it to a folder. Run:
 
 ```text
 SpotifyLyricsOverlay.exe
